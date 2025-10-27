@@ -1,0 +1,56 @@
+/* reset.css */
+
+/* Remove margens, paddings e bordas padrões */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Garante consistência de tipografia */
+html, body {
+  height: 100%;
+  font-size: 100%;
+  font-family: sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove estilos padrão de listas */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove estilos padrão de links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove bordas de imagens e garante responsividade */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Remove estilos padrão de formulários */
+button, input, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* Garante que botões não quebrem layout */
+button {
+  cursor: pointer;
+}
+
+/* Define comportamento padrão de tabelas */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

@@ -1,0 +1,76 @@
+body {
+    background: #FFFFFF;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f8f8;
+  margin: 0;   
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center; 
+  gap: 20px;
+  padding: 50px 0;
+}
+
+.card {
+  position: relative;
+  width: 200px;
+  height: 350px;
+  background: #eaeaea;
+  border-radius: 8px;
+  text-align: center;
+  padding-top: 60px; 
+}
+
+.card h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* Círculo com ícone */
+.icon {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+.icon img {
+  max-width: 40px;
+}
+
+/* Cores individuais */
+.pink {
+  background: linear-gradient(to bottom, #e91e63 60px, #f8d6e0 60px);
+}
+.pink h3 { background: #e91e63; }
+
+.blue {
+  background: linear-gradient(to bottom, #1a237e 60px, #d0d6f7 60px);
+}
+.blue h3 { background: #1a237e; }
+
+.gray {
+  background: linear-gradient(to bottom, #424242 60px, #d6d6d6 60px);
+}
+.gray h3 { background: #424242; }
+
+.cyan {
+  background: linear-gradient(to bottom, #0097a7 60px, #d1f3f6 60px);
+}
+.cyan h3 { background: #0097a7; }

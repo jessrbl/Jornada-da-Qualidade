@@ -1,0 +1,177 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr; /* Adiciona uma linha para o h1 */
+  gap: 20px;
+  height: 70vh;
+  width: 90vw;
+  margin: 2vh auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Estilo para o h1 - ocupa a primeira linha inteira */
+.container h1 {
+  grid-column: 1 / -1; /* Ocupa todas as colunas */
+  grid-row: 1; /* Fica na primeira linha */
+  text-align: justify;
+  margin: 0;
+  padding: 5px 0;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: normal;
+}
+
+.image-box {
+  display: flex;              /* ativa o flex container */
+  justify-content: center;    /* centraliza horizontalmente */
+  align-items: center;        /* centraliza verticalmente */
+}
+
+.container img {
+  width: 150px;
+}
+
+.text-box {
+  background-color: #f0f0f0;     /* cor de fundo do balão */
+  border-radius: 15px;           /* bordas arredondadas */
+  padding: 20px;                 /* espaço interno */
+  max-width: 80%;                /* largura máxima */
+  margin: 0 auto;                /* centraliza na tela */
+  position: relative;            /* permite posicionar o "triângulo" */
+  font-family: Arial, sans-serif;
+  font-size: 1.1rem;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* leve sombra */
+}
+
+/* triângulo do lado esquerdo */
+.text-box::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;                 /* distância da base */
+  left: 20px;                    /* posição do triângulo à esquerda */
+  border-width: 15px 15px 0;
+  border-style: solid;
+  border-color: #f0f0f0 transparent transparent transparent;
+  transform: rotate(270deg);     /* vira o triângulo pro lado esquerdo */
+}
+
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Mudei de flex-start para center - Isso centraliza verticalmente */
+  align-items: center; /* Já centraliza horizontalmente */
+  text-align: center;
+  padding: 20px;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 180px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Conteúdo com scroll - Mantém alinhado ao topo */
+.card-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 5px 10px;
+  text-align: left;
+  box-sizing: border-box;
+  /* Remove qualquer flexbox do card-content para não interferir */
+  display: block;
+}
+
+.card-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-content::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+
+.card-content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 3px;
+}
+
+.card-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+/* Estilização do conteúdo */
+.card-content p {
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.card-content ul {
+  margin: 8px 0 12px 0;
+  padding-left: 18px;
+}
+
+.card-content li {
+  margin: 6px 0;
+  line-height: 1.3;
+}
+
+.card-content .note {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 10px 0;
+  color: rgba(255,255,255,0.9);
+}
+
+.card-content .ref {
+  font-size: 0.75rem;
+  margin: 12px 0 0 0;
+  color: rgba(255,255,255,0.8);
+}
+
+/* Estilo para os títulos - Já está centralizado */
+.card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+/* Cores */
+.pink { background: #e91e63; }
+.gray { background: #607d8b; }
+.blue { background: #2196f3; }
+.cyan { background: #00bcd4; }
+
+/* Estilos específicos para as listas do JavaScript */
+.card-content ul {
+  margin: 8px 0 12px 0;
+  padding-left: 24px;
+  list-style-type: disc !important;
+}
+
+.card-content li {
+  margin: 8px 0;
+  line-height: 1.4;
+  display: list-item !important;
+}
+
+/* Garante que as bolinhas fiquem visíveis */
+.card-content li::marker {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1em;
+}
