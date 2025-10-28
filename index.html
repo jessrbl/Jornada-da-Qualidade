@@ -1,85 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semana da Qualidade</title>
-    <link rel="stylesheet" href="src/styles/reset.css">
-    <link rel="stylesheet" href="src/styles/vars.css">
-    <link rel="stylesheet" href="src/styles/header.css">
-    <link rel="stylesheet" href="src/styles/main.css">
-    <link rel="stylesheet" href="src/styles/footer.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jornada da Qualidade</title>
+  <link rel="stylesheet" href="src/styles/reset.css">
+  <link rel="stylesheet" href="src/styles/vars.css">
+  <link rel="stylesheet" href="src/styles/header.css">
+  <link rel="stylesheet" href="src/styles/main.css">
+  <link rel="stylesheet" href="src/styles/footer.css">
 </head>
 <body>
-    <header>
+  <header>
     <nav class="navbar"> 
-        <div class="image-container">
-            <figure> 
-                <img src="src/figures/image.png" alt="Logo jornada da qualidade" /> 
-            </figure>
-        </div>
-        
-        <h1 class="page-title">Jornada da Qualidade</h1>
-
-        <div class="nav-actions">
-            <a href="tela1.html" class="game-button">Retornar à página anterior</a>
-        </div>
-        
+      <div class="image-container">
+        <figure> 
+          <img src="src/figures/image.png" alt="Logo jornada da qualidade" /> 
+        </figure>
+      </div>
+      <h1 class="page-title">Jogo da Classificação</h1>
+      <div class="nav-actions">
+        <a href="tela1.html" class="game-button">Retornar à página anterior</a>
+      </div>
     </nav>
-    </header>
+  </header>
 
-    
-    <div class="container">
-    <div class="card pink" data-accept="llis, pure-moist, lente, balança, termometro, band-aid">
-      <div class="icon">
-        <img src="src/figures/icone1.jpg" alt="Dispositivos Médicos">
+  <div class="main-container">
+
+    <!-- Cards -->
+    <div class="cards">
+      <!-- Dispositivos Médicos: duas colunas -->
+      <div class="card pink two-columns" data-accept="llis, pure-moist, lente, termometro, band-aid">
+        <div class="icon">
+          <img src="src/figures/icone1.jpg" alt="Dispositivos Médicos">
+        </div>
+        <h3>DISPOSITIVOS MÉDICOS</h3>
+        <div class="card-objects"></div>
       </div>
-      <h3>DISPOSITIVOS MÉDICOS</h3>
-    </div>
-    
-    <div class="card blue" data-accept="pasta-de-dente, protetor, perfume, aromatizante">
-      <div class="icon">
-        <img src="src/figures/icone2.png" alt="Cosméticos">
+
+      <div class="card blue" data-accept="pasta-de-dente, protetor, perfume">
+        <div class="icon">
+          <img src="src/figures/icone2.png" alt="Cosméticos">
+        </div>
+        <h3>COSMÉTICOS</h3>
+        <div class="card-objects"></div>
       </div>
-      <h3>COSMÉTICOS</h3>
-    </div>
-    
-    <div class="card gray" data-accept="aspirina, soro">
-      <div class="icon">
-        <img src="src/figures/icone3.webp" alt="Medicamentos">
+
+      <div class="card gray" data-accept="aspirina, soro">
+        <div class="icon">
+          <img src="src/figures/icone3.webp" alt="Medicamentos">
+        </div>
+        <h3>MEDICAMENTOS</h3>
+        <div class="card-objects"></div>
       </div>
-      <h3>MEDICAMENTOS</h3>
-    </div>
-    
-    <div class="card cyan" data-accept="alcool">
-      <div class="icon">
-        <img src="src/figures/icone4.png" alt="Saneantes">
+
+      <div class="card cyan" data-accept="alcool, aromatizante">
+        <div class="icon">
+          <img src="src/figures/icone4.png" alt="Saneantes">
+        </div>
+        <h3>SANEANTES</h3>
+        <div class="card-objects"></div>
       </div>
-      <h3>SANEANTES</h3>
     </div>
 
+    <!-- Coluna direita -->
+    <div class="right-column">
+      <div class="image-box">
+        <figure>
+          <img src="src/figures/unnamed.png" alt="Foto assuntos regulatórios" />
+        </figure>
+      </div>
+
+      <div class="text-box">
+        <h1>Mova as figuras com o cursor até a caixa que representa a sua classificação.</h1>
+      </div>
+
+      <div class="objects">
+        <img src="src/figures/image (2).png" alt="Figura 1" draggable="true" class="draggable" id="aspirina">
+        <img src="src/figures/image (3).png" alt="Figura 2" draggable="true" class="draggable" id="llis">
+        <img src="src/figures/image (4).png" alt="Figura 3" draggable="true" class="draggable" id="soro">
+        <img src="src/figures/image (5).png" alt="Figura 4" draggable="true" class="draggable" id="pure-moist">
+        <img src="src/figures/image (6).png" alt="Figura 5" draggable="true" class="draggable" id="pasta-de-dente">
+        <img src="src/figures/image (7).png" alt="Figura 6" draggable="true" class="draggable" id="lente">
+        <img src="src/figures/image (9).png" alt="Figura 8" draggable="true" class="draggable" id="termometro">
+        <img src="src/figures/image (10).png" alt="Figura 9" draggable="true" class="draggable" id="band-aid">
+        <img src="src/figures/image (11).png" alt="Figura 10" draggable="true" class="draggable" id="protetor">
+        <img src="src/figures/image (12).png" alt="Figura 11" draggable="true" class="draggable" id="perfume">
+        <img src="src/figures/image (13).png" alt="Figura 12" draggable="true" class="draggable" id="aromatizante">  
+        <img src="src/figures/alcool.jpg" alt="Figura 13" draggable="true" class="draggable" id="alcool">     
+      </div>
     </div>
 
-    <div class="objects">
-    <img src="src/figures/image (2).png" alt="Figura 1" draggable="true" class="draggable" id="aspirina">
-    <img src="src/figures/image (3).png" alt="Figura 2" draggable="true" class="draggable" id="llis">
-    <img src="src/figures/image (4).png" alt="Figura 3" draggable="true" class="draggable" id="soro">
-    <img src="src/figures/image (5).png" alt="Figura 4" draggable="true" class="draggable" id="pure-moist">
-    <img src="src/figures/image (6).png" alt="Figura 5" draggable="true" class="draggable" id="pasta-de-dente">
-    <img src="src/figures/image (7).png" alt="Figura 6" draggable="true" class="draggable" id="lente">
-    <img src="src/figures/image (8).png" alt="Figura 7" draggable="true" class="draggable" id="balança">
-    <img src="src/figures/image (9).png" alt="Figura 8" draggable="true" class="draggable" id="termometro">
-    <img src="src/figures/image (10).png" alt="Figura 9" draggable="true" class="draggable" id="band-aid">
-    <img src="src/figures/image (11).png" alt="Figura 10" draggable="true" class="draggable" id="protetor">
-    <img src="src/figures/image (12).png" alt="Figura 10" draggable="true" class="draggable" id="perfume">
-    <img src="src/figures/image (13).png" alt="Figura 10" draggable="true" class="draggable" id="aromatizante">  
-    <img src="src/figures/alcool.jpg" alt="Figura 10" draggable="true" class="draggable" id="alcool">     
-   
-    </div>
+  </div>
 
-    <script src="src/js/drag.js"></script> 
-
-
+  <script src="src/js/drag.js"></script> 
 </body>
 </html>
