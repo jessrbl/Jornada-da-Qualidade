@@ -1,6 +1,8 @@
-// Set para registrar figuras que já erraram
-const figurasErradas = new Set();
+// Contadores para tentativas e erros
+let totalTentativas = 0;
+let totalErros = 0;
 
+// Manipuladores de drag
 function dragstartHandler(ev) {
   ev.dataTransfer.setData("text/plain", ev.target.id);
   ev.target.classList.add("dragging");
@@ -25,24 +27,11 @@ const respostasCorretas = {
   "cyan": ["alcool", "aromatizante"]
 };
 
-// Calcula percentual de acertos considerando erros
+// Calcula percentual de acertos baseado em tentativas
 function calcularAcertos() {
-  let acertos = 0;
-  let total = 0;
-
-  Object.keys(respostasCorretas).forEach(cor => {
-    const card = document.querySelector(`.card.${cor} .card-objects`);
-    const imgs = Array.from(card.querySelectorAll("img"));
-
-    imgs.forEach(img => {
-      total++;
-      if (respostasCorretas[cor].includes(img.id) && !figurasErradas.has(img.id)) {
-        acertos++;
-      }
-    });
-  });
-
-  return Math.round((acertos / total) * 100);
+  const acertos = totalTentativas - totalErros;
+  const percentual = totalTentativas === 0 ? 0 : Math.round((acertos / totalTentativas) * 100);
+  return percentual;
 }
 
 // Mostrar resultado dentro do container .objects
@@ -58,17 +47,31 @@ function mostrarResultadoNoObjects(percentual) {
   resultadoTexto.style.width = "100%";
 
   if (percentual >= 70) {
-    resultadoTexto.innerHTML = `<h2>Parabéns! 🎉</h2><p>Você acertou ${percentual}% das figuras.</p>`;
+    resultadoTexto.innerHTML = `<h2>Parabéns! 🎉</h2><p>Você acertou ${percentual}% das tentativas.</p>`;
   } else {
-    resultadoTexto.innerHTML = `<h2>Ops!</h2><p>Você acertou apenas ${percentual}% das figuras.</p>
+    resultadoTexto.innerHTML = `<h2>Ops!</h2><p>Você acertou apenas ${percentual}% das tentativas.</p>
     <button id="restart-btn">Recomeçar</button>`;
-    resultadoTexto.querySelector("#restart-btn").addEventListener("click", () => location.reload());
+
+    const btn = resultadoTexto.querySelector("#restart-btn");
+    btn.style.padding = "10px 20px";
+    btn.style.fontSize = "16px";
+    btn.style.border = "none";
+    btn.style.borderRadius = "8px";
+    btn.style.backgroundColor = "#4CAF50";
+    btn.style.color = "#fff";
+    btn.style.cursor = "pointer";
+    btn.style.marginTop = "15px";
+
+    btn.addEventListener("mouseover", () => btn.style.backgroundColor = "#45a049");
+    btn.addEventListener("mouseout", () => btn.style.backgroundColor = "#4CAF50");
+
+    btn.addEventListener("click", () => location.reload());
   }
 
   objectsContainer.appendChild(resultadoTexto);
 }
 
-// Verifica se todas as figuras foram colocadas em algum card
+// Verifica se todas as figuras estão em algum card
 function verificarFinal() {
   const todasFiguras = document.querySelectorAll(".draggable");
   let todasEmCards = true;
@@ -96,13 +99,15 @@ cards.forEach(card => {
     const aceita = card.dataset.accept?.split(",").map(s => s.trim());
     const img = document.getElementById(draggedId);
 
-    // Figura é aceita no card
+    // Conta tentativa
+    totalTentativas++;
+
     if (!aceita || aceita.includes(draggedId)) {
+      // Figura correta: entra no card
       card.querySelector(".card-objects").appendChild(img);
     } else {
-      // Conta como erro
-      figurasErradas.add(draggedId);
-      card.querySelector(".card-objects").appendChild(img); // ainda entra no card
+      // Figura errada: conta erro
+      totalErros++;
       alert("Figura não corresponde a este card!");
     }
 
