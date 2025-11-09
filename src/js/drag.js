@@ -1,5 +1,5 @@
 // ==============================
-// Jogo Drag & Drop (PC + Mobile)
+// Jogo Drag & Drop (PC)
 // ==============================
 
 let totalTentativas = 0;
@@ -11,24 +11,16 @@ let offsetX = 0;
 let offsetY = 0;
 
 // ----------------------
-// Função para iniciar arraste
+// Iniciar arraste
 // ----------------------
-function startDrag(ev, isTouch) {
+function startDrag(ev) {
   ev.preventDefault();
   draggedElement = ev.target;
   draggedElement.classList.add("dragging");
   originalParent = draggedElement.parentNode;
 
-  let clientX, clientY;
-  if (isTouch) {
-    clientX = ev.touches[0].clientX;
-    clientY = ev.touches[0].clientY;
-  } else {
-    clientX = ev.clientX;
-    clientY = ev.clientY;
-    document.addEventListener("mousemove", mouseMoveHandler);
-    document.addEventListener("mouseup", mouseUpHandler);
-  }
+  const clientX = ev.clientX;
+  const clientY = ev.clientY;
 
   const rect = draggedElement.getBoundingClientRect();
   offsetX = clientX - rect.left;
@@ -37,48 +29,38 @@ function startDrag(ev, isTouch) {
   draggedElement.style.position = "absolute";
   draggedElement.style.zIndex = 1000;
   draggedElement.style.transition = "none";
-
   draggedElement.style.left = clientX - offsetX + "px";
   draggedElement.style.top = clientY - offsetY + "px";
+
+  document.addEventListener("mousemove", mouseMoveHandler);
+  document.addEventListener("mouseup", mouseUpHandler);
 }
 
 // ----------------------
-// Função para mover arraste
+// Mover arraste
 // ----------------------
-function moveDrag(ev, isTouch) {
-  ev.preventDefault();
+function moveDrag(ev) {
   if (!draggedElement) return;
 
-  let clientX, clientY;
-  if (isTouch) {
-    clientX = ev.touches[0].clientX;
-    clientY = ev.touches[0].clientY;
-  } else {
-    clientX = ev.clientX;
-    clientY = ev.clientY;
-  }
+  const clientX = ev.clientX;
+  const clientY = ev.clientY;
 
   draggedElement.style.left = clientX - offsetX + "px";
   draggedElement.style.top = clientY - offsetY + "px";
 }
 
 // ----------------------
-// Função para finalizar arraste
+// Finalizar arraste
 // ----------------------
-function endDrag(ev, isTouch) {
+function endDrag(ev) {
   if (!draggedElement) return;
   draggedElement.classList.remove("dragging");
 
-  let clientX, clientY;
-  if (isTouch) {
-    clientX = ev.changedTouches[0].clientX;
-    clientY = ev.changedTouches[0].clientY;
-  } else {
-    clientX = ev.clientX;
-    clientY = ev.clientY;
-    document.removeEventListener("mousemove", mouseMoveHandler);
-    document.removeEventListener("mouseup", mouseUpHandler);
-  }
+  const clientX = ev.clientX;
+  const clientY = ev.clientY;
+
+  document.removeEventListener("mousemove", mouseMoveHandler);
+  document.removeEventListener("mouseup", mouseUpHandler);
 
   const elementsAtPoint = document.elementsFromPoint(clientX, clientY);
   let cardEncontrado = elementsAtPoint.find(el => el.classList.contains("card"));
@@ -112,7 +94,7 @@ function endDrag(ev, isTouch) {
 }
 
 // ----------------------
-// Resetar figura para container original
+// Resetar figura
 // ----------------------
 function resetarFigura(fig) {
   fig.style.transition = "all 0.3s";
@@ -148,7 +130,7 @@ function verificarFinal() {
 }
 
 // ----------------------
-// Mostrar resultado dentro de .objects
+// Mostrar resultado + gabarito
 // ----------------------
 function mostrarResultadoNoObjects(percentual) {
   const objectsContainer = document.querySelector(".objects");
@@ -161,59 +143,85 @@ function mostrarResultadoNoObjects(percentual) {
   resultado.style.background = "#f0f0f0";
   resultado.style.width = "100%";
 
-  if (percentual >= 70) {
-    resultado.innerHTML = `<h2>Parabéns! 🎉</h2><p>Você acertou ${percentual}% das tentativas.</p>`;
-  } else {
-    resultado.innerHTML = `<h2>Ops!</h2><p>Você acertou apenas ${percentual}% das tentativas.</p>
-      <button id="restart-btn">Recomeçar</button>`;
+  resultado.innerHTML = `<h2>Você acertou ${percentual}% das tentativas.</h2>
+                         <button id="restart-btn">Recomeçar</button>`;
 
-    const btn = resultado.querySelector("#restart-btn");
-    btn.style.padding = "10px 20px";
-    btn.style.fontSize = "16px";
-    btn.style.border = "none";
-    btn.style.borderRadius = "8px";
-    btn.style.backgroundColor = "#4CAF50";
-    btn.style.color = "#fff";
-    btn.style.cursor = "pointer";
-    btn.style.marginTop = "15px";
+  const btn = resultado.querySelector("#restart-btn");
+  btn.style.padding = "10px 20px";
+  btn.style.fontSize = "16px";
+  btn.style.border = "none";
+  btn.style.borderRadius = "8px";
+  btn.style.backgroundColor = "#4CAF50";
+  btn.style.color = "#fff";
+  btn.style.cursor = "pointer";
+  btn.style.marginTop = "15px";
 
-    btn.addEventListener("mouseover", () => btn.style.backgroundColor = "#45a049");
-    btn.addEventListener("mouseout", () => btn.style.backgroundColor = "#4CAF50");
+  btn.addEventListener("mouseover", () => btn.style.backgroundColor = "#45a049");
+  btn.addEventListener("mouseout", () => btn.style.backgroundColor = "#4CAF50");
 
-    btn.addEventListener("click", () => {
-      totalTentativas = 0;
-      totalErros = 0;
-      objectsContainer.innerHTML = "";
-      const allFigures = document.querySelectorAll(".draggable");
-      allFigures.forEach(fig => {
-        fig.style.position = "";
-        fig.style.left = "";
-        fig.style.top = "";
-        fig.style.zIndex = "";
-        document.querySelector(".objects").appendChild(fig);
-      });
+  btn.addEventListener("click", () => {
+    totalTentativas = 0;
+    totalErros = 0;
+    objectsContainer.innerHTML = "";
+    const allFigures = document.querySelectorAll(".draggable");
+    allFigures.forEach(fig => {
+      fig.style.position = "";
+      fig.style.left = "";
+      fig.style.top = "";
+      fig.style.zIndex = "";
+      document.querySelector(".objects").appendChild(fig);
     });
-  }
+  });
 
   objectsContainer.appendChild(resultado);
+
+  // -----------------------------
+  // Mostrar gabarito completo
+  // -----------------------------
+  const gabaritoDiv = document.createElement("div");
+  gabaritoDiv.style.textAlign = "left";
+  gabaritoDiv.style.padding = "20px";
+  gabaritoDiv.style.borderRadius = "12px";
+  gabaritoDiv.style.background = "#f9f9f9";
+  gabaritoDiv.style.width = "100%";
+  gabaritoDiv.style.marginTop = "20px";
+
+  gabaritoDiv.innerHTML = `<h2>Gabarito 📝</h2>`;
+
+  const allCards = document.querySelectorAll(".card");
+  allCards.forEach(card => {
+    const cardTitle = card.querySelector("h3").textContent;
+    const aceitaveis = card.dataset.accept?.split(",").map(s => s.trim()) || [];
+
+    const ul = document.createElement("ul");
+    aceitaveis.forEach(id => {
+      const figura = document.getElementById(id);
+      const nome = figura ? figura.nextElementSibling?.textContent || id : id;
+      const li = document.createElement("li");
+      li.textContent = nome;
+      ul.appendChild(li);
+    });
+
+    const cardDiv = document.createElement("div");
+    cardDiv.style.marginBottom = "15px";
+    cardDiv.innerHTML = `<strong>${cardTitle}:</strong>`;
+    cardDiv.appendChild(ul);
+    gabaritoDiv.appendChild(cardDiv);
+  });
+
+  objectsContainer.appendChild(gabaritoDiv);
 }
 
 // ----------------------
-// Handlers específicos para mouse
+// Handlers de mouse
 // ----------------------
-function mouseMoveHandler(ev) { moveDrag(ev, false); }
-function mouseUpHandler(ev) { endDrag(ev, false); }
+function mouseMoveHandler(ev) { moveDrag(ev); }
+function mouseUpHandler(ev) { endDrag(ev); }
 
 // ----------------------
-// Adicionando eventos para todas as figuras
+// Adicionando eventos para figuras
 // ----------------------
 const figures = document.querySelectorAll(".draggable");
 figures.forEach(img => {
-  // Mobile
-  img.addEventListener("touchstart", ev => startDrag(ev, true), { passive: false });
-  img.addEventListener("touchmove", ev => moveDrag(ev, true), { passive: false });
-  img.addEventListener("touchend", ev => endDrag(ev, true));
-
-  // PC
-  img.addEventListener("mousedown", ev => startDrag(ev, false));
+  img.addEventListener("mousedown", ev => startDrag(ev));
 });
